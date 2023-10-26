@@ -1,6 +1,6 @@
 import Archetype, { Mage } from './Archetypes';
 import Energy from './Energy';
-import Fighter from './Fighter';
+import Fighter, { SimpleFighter } from './Fighter';
 import Race, { Elf } from './Races';
 import getRandomInt from './utils';
 
@@ -81,11 +81,11 @@ export default class Character implements Fighter {
     this._lifePoints = Math.max(value, 0) || -1;
   }
 
-  attack(enemy: Fighter): void {
+  attack(enemy: SimpleFighter): void {
     enemy.receiveDamage(this._strength);
   }
 
-  special?(enemy: Fighter): void {
+  special?(enemy: SimpleFighter): void {
     if (this.energy.amount < this.archetype.cost) {
       throw new Error('Not enough energy');
     }
