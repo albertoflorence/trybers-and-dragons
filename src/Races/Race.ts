@@ -5,7 +5,7 @@ export default abstract class Race {
   ) {
   }
 
-  static createdRacesInstances(): never {
+  static createdRacesInstances(): number {
     throw new Error('Not implemented');
   }
 
