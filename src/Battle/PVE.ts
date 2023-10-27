@@ -12,13 +12,6 @@ export default class PVP extends Battle {
     this.monsters = initialMonsters;
   }
 
-  private monstersLifePoints(): number {
-    return this.monsters.reduce((
-      total,
-      { lifePoints },
-    ) => total + Math.max(lifePoints, 0), 0) || -1;
-  }
-
   private getMonster() {
     const index = getRandomInt(0, this.monsters.length - 1);
     return this.monsters[index];
@@ -30,11 +23,15 @@ export default class PVP extends Battle {
     this.monsters = this.monsters.filter((m) => m !== monster);
   }
 
+  private shouldBattle() {
+    return this.player.lifePoints > 0 && this.monsters.length > 0;
+  }
+
   fight(): number {
     const { player } = this;
     let turn = Math.random() > 0.5;
 
-    while (Math.min(player.lifePoints, this.monstersLifePoints()) > -1) {
+    while (this.shouldBattle()) {
       const monster = this.getMonster();
       const attacker = turn ? player : monster;
       const defender = !turn ? monster : player;
