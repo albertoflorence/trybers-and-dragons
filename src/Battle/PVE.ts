@@ -34,7 +34,7 @@ export default class PVP extends Battle {
     while (this.shouldBattle()) {
       const monster = this.getMonster();
       const attacker = turn ? player : monster;
-      const defender = !turn ? monster : player;
+      const defender = turn ? monster : player;
       attacker.attack(defender);
       this.handleMonsterDeath(monster);
       turn = !turn;

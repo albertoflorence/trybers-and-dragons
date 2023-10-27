@@ -15,7 +15,7 @@ export default class PVP extends Battle {
 
     while (Math.min(player1.lifePoints, player2.lifePoints) > -1) {
       const attacker = turn ? player1 : player2;
-      const defender = !turn ? player2 : player1;
+      const defender = turn ? player2 : player1;
       attacker.attack(defender);
       turn = !turn;
     }
